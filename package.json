@@ -1,0 +1,11 @@
+{
+  "name": "card-game-simulator",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "tsc --outDir dist main.ts",
+    "start": "node dist/main.js"
+  },
+  "devDependencies": {
+    "typescript": "5.7.3"
+  }
+}
