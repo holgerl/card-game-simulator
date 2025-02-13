@@ -1,0 +1,20 @@
+simulator.simulate(nofPlayers, ruleset, tactic)
+    ruleset.makeStartState(nofPlayers) -> state
+
+    print state.toString()
+
+    simulator.stepState
+        ruleset.listMoves(state) -> moves
+        tactic.chooseMove(state, moves) -> move
+        ruleset.doMove(state, move) -> state
+
+    ruleset.isGameOver(state)
+
+    ruleset.listWinners(state) -> ["player 1", "player 3"]
+
+---
+
+RuleSet
+State
+Tactic
+Simulator
