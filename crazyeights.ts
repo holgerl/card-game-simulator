@@ -122,7 +122,14 @@ export class CrazyEightsRuleSet implements RuleSet {
     }
 
     listWinners(state: CrazyEightsState): number[] {
-        return state.hands.filter(hand => hand.size() === 0).map((_, i) => i)
+        const winnerPlayers = [];
+        
+        state.hands.forEach((hand, i) => {
+                if (hand.size() === 0) winnerPlayers.push(i);
+            }
+        );
+        
+        return winnerPlayers
     }
 
     listMoves(state: CrazyEightsState): CrazyEightsMove[] {
