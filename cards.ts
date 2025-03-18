@@ -53,6 +53,12 @@ export class Pile {
         this.cards.push(card);
     }
 
+    pushMany(pile: Pile): void {
+        pile.cards.forEach(
+            (card) => this.cards.push(card)
+        );
+    }
+
     pop(): StandardPlayingCard {
         if (this.cards.length === 0) {
             throw new Error("Pile is empty");
@@ -77,6 +83,10 @@ export class Pile {
     size(): number {
         return this.cards.length;
     }
+    
+    isEmpty(): boolean {
+        return this.size() === 0;
+    }
 
     toString(): string {
         return "[" + this.cards.map(card => card.toString()).join(" ") + "]";
@@ -89,6 +99,32 @@ export class Pile {
         }
         
         return this
+    }
+    
+    combinations(): Pile[] {        
+        const allCombinations: Pile[] = [];
+        
+        function recursive(pile: Pile, index: number, currentCombination: Pile) {
+            let onLastCard = index === pile.size();
+            
+            if (onLastCard) {
+                if (currentCombination.size() > 0) { // Disregard combinations with no cards
+                    allCombinations.push(currentCombination);
+                } 
+                return;
+            }
+            
+            const withoutCard = currentCombination.copy();
+            recursive(pile, index + 1, withoutCard);
+            
+            const withCard = currentCombination.copy()
+            withCard.push(pile.cards[index]);
+            recursive(pile, index + 1, withCard);
+        }
+
+        recursive(this, 0, new Pile());
+        
+        return allCombinations;
     }
 
     copy(): Pile {
