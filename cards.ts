@@ -30,7 +30,7 @@ export class StandardPlayingCard {
             }
         }
 
-        return `${suitSymbols[this.suit]}${rankToString(this.rank)}`;
+        return `${rankToString(this.rank)}${suitSymbols[this.suit]}`;
     }
     
     matches(other: StandardPlayingCard): boolean {
